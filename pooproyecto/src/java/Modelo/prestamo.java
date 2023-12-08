@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import java.sql.Date;
+
 
 /**
  *
@@ -13,14 +13,13 @@ import java.sql.Date;
  */
 public class prestamo {
     private int idPrestamo;
-    private int idUsuario;
-    private int idDocumento;
-    private String fechaPrestamo;
-    private String fechaDevolucion;      
-    private double mora;
-    private documento titulo;
     private usuario nombreUsuario;
+    private documento titulo;
+    private String fechaPrestamo;
+    private String fechaDevolucion; 
     private boolean estado;
+    private double mora;
+   
     // Getters y setters
 
     public int getIdPrestamo() {
@@ -31,20 +30,20 @@ public class prestamo {
         this.idPrestamo = idPrestamo;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public usuario getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setNombreUsuario(usuario nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public int getIdDocumento() {
-        return idDocumento;
+    public documento getTitulo() {
+        return titulo;
     }
 
-    public void setIdDocumento(int idDocumento) {
-        this.idDocumento = idDocumento;
+    public void setTitulo(documento titulo) {
+        this.titulo = titulo;
     }
 
     public String getFechaPrestamo() {
@@ -63,6 +62,14 @@ public class prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public double getMora() {
         return mora;
     }
@@ -71,29 +78,7 @@ public class prestamo {
         this.mora = mora;
     }
 
-    public documento getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(documento titulo) {
-        this.titulo = titulo;
-    }
-
-    public usuario getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(usuario nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
+   
 
     
 

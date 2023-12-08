@@ -20,7 +20,7 @@ public class DAOCARGARDOCU extends Conexion {
         List<documento> documentos;
         documento documen;
         ResultSet rs = null;
-        String sql = "SELECT D.IDDOCUMENTO , D.TITULO, D.ESTADO FROM documentos D " 
+        String sql = "SELECT D.IDDOCUMENTO , D.TITULO FROM documentos D " 
                 + "ORDER BY D.IDDOCUMENTO";
 
         try {
@@ -31,7 +31,6 @@ public class DAOCARGARDOCU extends Conexion {
                 documen = new documento();
                 documen. setIdDocumento(rs.getInt("IDDOCUMENTO"));
                 documen.setTitulo(rs.getString("TITULO"));
-                documen.setEstado(rs.getBoolean("ESTADO"));
                 documentos.add(documen);
             }
             this.cerrar(true);

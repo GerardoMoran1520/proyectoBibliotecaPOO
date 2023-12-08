@@ -1,15 +1,12 @@
 package Controlador;
 
-import Modelo.DAOCARGARUSU;
+
 import Modelo.DAOCARGO;
 
 import Modelo.DAOUSUARIO;
 import Modelo.cargo;
-import Modelo.documento;
-import Modelo.prestamo;
 import Modelo.usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,11 +56,7 @@ public class srvUsuario extends HttpServlet {
                     default:
                         response.sendRedirect("identificar.jsp");
                 }
-            } else if (request.getParameter("cambiar") != null) {
-                cambiarEstado(request, response);
-            
-                
-            } else {
+            }  else {
                 response.sendRedirect("identificar.jsp");
             }
         } catch (Exception e) {
@@ -324,36 +317,6 @@ public class srvUsuario extends HttpServlet {
         }
     }
 
-    private void cambiarEstado(HttpServletRequest request, HttpServletResponse response) {
-           DAOUSUARIO dao;
-        usuario usu;
-        try {
-            dao = new DAOUSUARIO();
-            usu = new usuario();
-
-            if (request.getParameter("cambiar").equals("activar")) {
-                usu.setEstado(true);
-            } else {
-                usu.setEstado(false);
-            }
-
-            if (request.getParameter("cod") != null) {
-                usu.setId_usuario(Integer.parseInt(request.getParameter("cod")));
-                dao.cambiarVigencia(usu);
-            } else {
-                request.setAttribute("msje", "No se obtuvo el id del usuario");
-            }
-
-        } catch (Exception e) {
-            request.setAttribute("msje", e.getMessage());
-        }
-        this.listarUsuarios(request, response);
-    }
-    
-    
- 
-   
-    
 
      
 }

@@ -5,16 +5,13 @@
  */
 package Controlador;
 
-import Modelo.DAOCARGARUSU;
-import Modelo.DAOCARGARDOCU;
+
+
 import Modelo.DAODOCUMENTO;
-import Modelo.DAOPRESTAMO;
 import Modelo.DAOUSUARIO;
 import Modelo.documento;
-import Modelo.prestamo;
 import Modelo.usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -191,21 +188,18 @@ public class srvDocumento extends HttpServlet {
             doc.setCantidadTotal(Integer.parseInt(request.getParameter("txtTotal")));
             doc.setCantidadDisponible(Integer.parseInt(request.getParameter("txtDisponible")));
             doc.setAnioPublicacion(Integer.parseInt(request.getParameter("txtAnio")));
-            if (request.getParameter("chkEstado") != null) {
-                doc.setEstado(false);
-            } else {
-                doc.setEstado(true);
-            }
+           
             daoDoc = new DAODOCUMENTO();
-            try {
+           try {
                 daoDoc.registrarDocumento(doc);
                 response.sendRedirect("srvDocumento?accion=listarDocumentos");
             } catch (Exception e) {
                 request.setAttribute("msje",
                         "No se pudo registrar el documento" + e.getMessage());
-                request.setAttribute("documento", doc);
+                request.setAttribute("documentos", doc);
                 this.presentarFormulario(request, response);
             }
+
         }
     }
 

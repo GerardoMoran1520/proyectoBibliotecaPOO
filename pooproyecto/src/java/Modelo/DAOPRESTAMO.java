@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,10 @@ public class DAOPRESTAMO extends Conexion {
         List<prestamo> prestamos;
         prestamo presta;
         ResultSet rs = null;
-        String sql = "SELECT P.IDPRESTAMO, U.NOMBREUSUARIO, D.TITULO, P.FECHAPRESTAMO, P.FECHADEVOLUCION FROM prestamos P \n" +
-                     "INNER JOIN usuario U ON U.IDUSUARIO = P.IDUSUARIO \n" +
-                     "INNER JOIN documentos D ON D.IDDOCUMENTO = P.IDDOCUMENTO \n" +
-                     "ORDER BY P.IDPRESTAMO";
+        String sql = "SELECT P.IDPRESTAMO, U.NOMBREUSUARIO, D.IDDOCUMENTO, D.TITULO, P.FECHAPRESTAMO, P.FECHADEVOLUCION FROM prestamos P \n" +
+             "INNER JOIN usuario U ON U.IDUSUARIO = P.IDUSUARIO \n" +
+             "INNER JOIN documentos D ON D.IDDOCUMENTO = P.IDDOCUMENTO \n" +
+             "ORDER BY P.IDPRESTAMO";
 
         try {
             this.conectar(false);
@@ -52,12 +53,31 @@ public class DAOPRESTAMO extends Conexion {
         }
         return prestamos;
     }
-        public void registrarPrestamos (prestamo prest) throws Exception {
-        String sql;
-        sql = "INSERT INTO prestamos (IDUSUARIO, IDDOCUMENTO, FECHAPRESTAMO, FECHADEVOLUCION) "
-                + "VALUES ('" + prest.getNombreUsuario().getId_usuario() + "', '"
-                + prest.getTitulo().getIdDocumento() +     
-                  ")";
+      
+   
+   public void registrarPrestamo(prestamo presta) throws Exception {
+    String sql;
+    sql = "INSERT INTO prestamos (IDUSUARIO, IDDOCUMENTO, FECHAPRESTAMO, FECHADEVOLUCION) "
+            + "VALUES ('"
+            + presta.getNombreUsuario().getId_usuario() + "', "
+            + presta.getTitulo().getIdDocumento() + ", '"
+            + presta.getFechaPrestamo() + "', '"  
+            + presta.getFechaDevolucion() + "')";
+
+    try {
+        this.conectar(false);
+        this.ejecutarOrden(sql);
+        this.cerrar(true);
+    } catch (Exception e) {
+        this.cerrar(false);
+        throw e;
+    }
+}
+
+    public void cambiarVigencia(prestamo prest) throws Exception {
+        String sql = "UPDATE prestamos SET ESTADO = "
+                + (prest.isEstado() == true ? "1" : "0")
+                + " WHERE IDPRESTAMO = " + prest.getIdPrestamo();
         try {
             this.conectar(false);
             this.ejecutarOrden(sql);
@@ -67,6 +87,5 @@ public class DAOPRESTAMO extends Conexion {
             throw e;
         }
     }
-        
   
 }

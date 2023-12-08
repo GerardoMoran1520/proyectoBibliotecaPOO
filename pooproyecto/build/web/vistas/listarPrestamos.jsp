@@ -89,31 +89,43 @@
 
                     
 
-                    <!-- Sidebar Menu -->
-                      <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header "><center><b> INICIO</b></center></li>
+                 <!-- Sidebar Menu -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header "><center><b> INICIO </b></center></li>
                         <!-- Optionally, you can add icons to the links -->
                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Panel Administrador</span></a></li>
                         <li class="treeview">
-                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Usuarios</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                               <li class="active"><a href="srvUsuario?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                             
                              <li class="active"><a href="srvUsuario?accion=listarUsuarios"><i class="fa fa-address-card"></i>Usuarios</a></li>
 
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Prestamos</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Documentos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Listado</a></li>
+                              <li class="active"><a href="srvDocumento?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                           
+
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span> Registros Prestamos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                               <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Prestamos</a></li>
                               
                             </ul>
                         </li>
@@ -132,7 +144,7 @@
                 </section>
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <a href="srvPrestamo?accion=nuevo1" class="btn btn-success">
+                    <a href="srvPrestamo?accion=nuevo" class="btn btn-success">
                         <i class="fa fa-plus"></i> Nuevo Prestamo </a>
 
                     <ol class="breadcrumb">
@@ -154,23 +166,51 @@
                                     <thead>
                                         <tr>
                                             <th>ID Prestamo</th>
+                                            
+                                            <th>Usuario</th>
+                                            <th>Documento Prestado</th>
                                             <th>Fecha Prestamo</th>
                                             <th>Fecha Devolucion</th>
-                                            <th>ID Usuario</th>
-                                            <th>ID Titulo</th>
-                                            <th>Acciones</th> 
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
+                                    
                                     <c:forEach var="user" items="${prestamos}" varStatus="iteracion">                                                    
-                                        
+                                         <tr>
                                             <td>${iteracion.index + 1}</td>
-                                            <td>${user.fechaPrestamo}</td>
+                                           
+                                            <td>${user.nombreUsuario.nombreUsuario}</td>
+                                            <td>${user.titulo.titulo}</td>
+                                             <td>${user.fechaPrestamo}</td>
                                             <td>${user.fechaDevolucion}</td>
-                                            <td>${user.nombreUsuario}</td>
-                                            <td>${user.titulo}</td>
-                                           
-                                           
-                                                                                      
+                                            <c:if test="${user.estado == true}">
+                                                <td><span class="badge bg-green active">Documento Devuelto </span></td> 
+                                            </c:if>
+                                            <c:if test="${user.estado == false}">
+                                                <td><span class="badge bg-red active">Documento Prestado</span></td> 
+                                            </c:if>
+                                              <td><a href="<c:url value="srvPrestamo">
+                                                      
+                                                   </c:url>"></a>
+                                                <!-- DESACTIVAR / ACTIVAR USUARIOS -->
+                                                <c:choose>
+                                                    <c:when test="${user.estado == true}">
+                                                        <input type="hidden" id="item" value="${user.idPrestamo}">
+                                                        <a id="desactivarUsuario" href="srvPrestamo?cambiar=desactivar&cod=${user.idPrestamo}" class="btn btn-danger"  data-toggle="tooltip" title="Desactivar" data-original-title="Desactivar">
+                                                            <i class="fa fa-remove"></i></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <input type="hidden" id="item" value="${user.idPrestamo}">
+                                                        <a id="activarUsuario" href="srvPrestamo?cambiar=activar&cod=${user.idPrestamo}" class="btn btn-primary" data-toggle="tooltip" title="Activar" data-original-title="Activar">
+                                                            <i class="glyphicon glyphicon-eye-open"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                              
+                                               
+
+                                            </td>
+                                         </tr>                                                 
                                     </c:forEach>                                               
                                 </table>
                             </div>
@@ -212,8 +252,7 @@
         <script src="dist/js/adminlte.min.js"></script>
         <script src="bower_components/datatables.net/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        <script src="swetalert/sweetalert.js" type="text/javascript"></script>
-        <script src="js/funcionesUsuario.js" type="text/javascript"></script>
+     
         <script>
             $(document).ready(function () {
                 $('#tablaUsuarios').DataTable();

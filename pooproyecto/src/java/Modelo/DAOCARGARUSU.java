@@ -21,7 +21,7 @@ public class DAOCARGARUSU extends Conexion {
         List<usuario> usuarios;
         usuario usuari;
         ResultSet rs = null;
-        String sql = "SELECT U.IDUSUARIO, U.NOMBREUSUARIO, U.ESTADO FROM USUARIO U "
+        String sql = "SELECT U.IDUSUARIO, U.NOMBREUSUARIO FROM USUARIO U "
                 + "ORDER BY U.IDUSUARIO";
 
         try {
@@ -32,7 +32,6 @@ public class DAOCARGARUSU extends Conexion {
                 usuari = new usuario();
                 usuari. setId_usuario(rs.getInt("IDUSUARIO"));
                 usuari.setNombreUsuario(rs.getString("NOMBREUSUARIO"));
-                usuari.setEstado(rs.getBoolean("ESTADO"));
                 usuarios.add(usuari);
             }
             this.cerrar(true);

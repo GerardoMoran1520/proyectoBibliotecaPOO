@@ -90,30 +90,42 @@
                     
 
                     <!-- Sidebar Menu -->
-                      <ul class="sidebar-menu" data-widget="tree">
+                    <ul class="sidebar-menu" data-widget="tree">
                         <li class="header "><center><b> INICIO</b></center></li>
                         <!-- Optionally, you can add icons to the links -->
                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Panel Administrador</span></a></li>
                         <li class="treeview">
-                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Usuarios</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                               <li class="active"><a href="srvUsuario?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                             
                              <li class="active"><a href="srvUsuario?accion=listarUsuarios"><i class="fa fa-address-card"></i>Usuarios</a></li>
 
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Prestamos</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Documentos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Listado</a></li>
+                              <li class="active"><a href="srvDocumento?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                           
+
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span> Registros Prestamos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                               <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Prestamos</a></li>
                               
                             </ul>
                         </li>
@@ -153,8 +165,7 @@
                                         <tr>
                                             <th>IDUsuario</th>
                                             <th>Usuario</th>
-                                            <th>Clave</th>
-                                            <th>Estado</th>
+                                            <th>Clave</th>            
                                             <th>Cargo</th>
                                             <th>Acciones</th> 
                                         </tr>
@@ -164,31 +175,14 @@
                                             <td>${iteracion.index + 1}</td>
                                             <td>${user.nombreUsuario}</td>
                                             <td>${user.clave}</td>
-                                            <c:if test="${user.estado == true}">
-                                                <td><span class="badge bg-green active">Usuario Activo</span></td> 
-                                            </c:if>
-                                            <c:if test="${user.estado == false}">
-                                                <td><span class="badge bg-red active">Usuario Inactivo</span></td> 
-                                            </c:if>
+                                           
                                             <td>${user.cargo.nombreCargo}</td>
                                             <td><a href="<c:url value="srvUsuario">
                                                        <c:param name="accion" value="leerUsuario" />
                                                        <c:param name="cod" value="${user.id_usuario}" />
                                                    </c:url>"><button type="button" class="btn btn-warning" data-toggle="tooltip"  title="Editar" data-original-title="Editar">
                                                         <i class="fa fa-pencil"></i></button></a>
-                                                <!-- DESACTIVAR / ACTIVAR USUARIOS -->
-                                                <c:choose>
-                                                    <c:when test="${user.estado == true}">
-                                                        <input type="hidden" id="item" value="${user.id_usuario}">
-                                                        <a id="desactivarUsuario" href="srvUsuario?cambiar=desactivar&cod=${user.id_usuario}" class="btn btn-danger"  data-toggle="tooltip" title="Desactivar" data-original-title="Desactivar">
-                                                            <i class="fa fa-remove"></i></a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                        <input type="hidden" id="item" value="${user.id_usuario}">
-                                                        <a id="activarUsuario" href="srvUsuario?cambiar=activar&cod=${user.id_usuario}" class="btn btn-primary" data-toggle="tooltip" title="Activar" data-original-title="Activar">
-                                                            <i class="glyphicon glyphicon-eye-open"></i></a>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                
                                                 <!-- ELIMINAR USUARIOS -->
                                                 <input type="hidden" id="codigo" value="${user.id_usuario}">
                                                 <a id="deleteUser" href="<c:url value="srvUsuario">

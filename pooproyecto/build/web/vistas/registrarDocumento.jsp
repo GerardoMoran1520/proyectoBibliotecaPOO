@@ -94,31 +94,43 @@
 
             
 
-                    <!-- Sidebar Menu -->
+                   <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header "><center><b> INICIO</b></center></li>
                         <!-- Optionally, you can add icons to the links -->
                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Panel Administrador</span></a></li>
                         <li class="treeview">
-                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Usuarios</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                              <li class="active"><a href="srvUsuario?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                             
                              <li class="active"><a href="srvUsuario?accion=listarUsuarios"><i class="fa fa-address-card"></i>Usuarios</a></li>
 
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Prestamos</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Documentos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                               <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Listado</a></li>
+                              <li class="active"><a href="srvDocumento?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                           
+
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span> Registros Prestamos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                               <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Prestamos</a></li>
                               
                             </ul>
                         </li>
@@ -157,48 +169,48 @@
                                     <label class="col-sm-2 control-label">Titulo</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: programacion en c++" name="txtTitulo" maxlength="50"
-                                               value="">
+                                        <input id="titulo" type="text" class="form-control" placeholder="Ejem: programacion en c++" name="txtTitulo" maxlength="50"
+                                               value="" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Autor</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: c++" name="txtAutor" maxlength="50"
-                                               value="">
+                                        <input id="autor" type="text" class="form-control" placeholder="Ejem: c++" name="txtAutor" maxlength="50"
+                                               value="" required>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label class="col-sm-2 control-label">Tipo De Documento</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: libro, revista" name="txtTipo" maxlength="50"
-                                               value="">
+                                        <input id="tipo" type="text" class="form-control" placeholder="Ejem: libro, revista" name="txtTipo" maxlength="50"
+                                               value="" required>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label class="col-sm-2 control-label">Ubicacion Fisica</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: pasillo 30 estante 12" name="txtUbicacion" maxlength="50"
-                                               value="">
+                                        <input id="ubicacion" type="text" class="form-control" placeholder="Ejem: pasillo 30 estante 12" name="txtUbicacion" maxlength="50"
+                                               value="" required>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label class="col-sm-2 control-label">Cantidad Total</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: 4" name="txtTotal" maxlength="10"
-                                               value="">
+                                        <input id="total" type="text" class="form-control" placeholder="Ejem: 4" name="txtTotal" maxlength="10"
+                                               value="" required>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label class="col-sm-2 control-label">Cantidad Disponible</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: 2" name="txtDisponible" maxlength="10"
-                                               value="">
+                                        <input id="disponible" type="text" class="form-control" placeholder="Ejem: 2" name="txtDisponible" maxlength="10"
+                                               value="" required>
                                     </div>
                                 </div>
                                 
@@ -206,20 +218,11 @@
                                     <label class="col-sm-2 control-label">Año De Publicación</label>
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ejem: 1999" name="txtDisponible" maxlength="10"
-                                               value="">
+                                        <input id="anio" type="text" class="form-control" placeholder="Ejem: 1999" name="txtAnio" maxlength="10"
+                                               value="" required>
                                     </div>
                                 </div>
-                              
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="chkEstado" checked=""> Activo
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                             
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">

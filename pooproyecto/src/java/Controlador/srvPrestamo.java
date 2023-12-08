@@ -43,7 +43,7 @@ public class srvPrestamo extends HttpServlet {
                     case "cerrar":
                         cerrarsession(request, response);
                         break;
-                     case "nuevo1":
+                     case "nuevo":
                         presentarFormulario(request, response);
                         break;
                       
@@ -60,10 +60,15 @@ public class srvPrestamo extends HttpServlet {
                     default:
                         response.sendRedirect("identificar.jsp");
                 }
+            }else if (request.getParameter("cambiar") != null) {
+                cambiarEstado(request, response);
+            
+                
             } else {
                 response.sendRedirect("identificar.jsp");
             }
         } catch (Exception e) {
+            
             try {
                 this.getServletConfig().getServletContext().getRequestDispatcher("/mensaje.jsp").forward(request, response);
 
@@ -194,57 +199,87 @@ public class srvPrestamo extends HttpServlet {
      
     }
 
-   private void registrarPrestamo(HttpServletRequest request, HttpServletResponse response) {
-        DAOPRESTAMO daoPres;
-        prestamo pres = null;
-        usuario usuar;
-        documento docu;
-        if (request.getParameter("cboUser") != null
-                && request.getParameter("cboDocumento") != null
-           ) {
+  private void registrarPrestamo(HttpServletRequest request, HttpServletResponse response) {
+    DAOPRESTAMO daoPres;
+    prestamo pres = null;
+    usuario usuar;
+    documento docu;
+    if (request.getParameter("cboUser") != null
+            && request.getParameter("cboDocumento") != null
+             && request.getParameter("txtPrestamo") != null
+            && request.getParameter("txtDevolucion") != null
+       ) {
 
-            pres = new prestamo();
-            
-            usuar = new usuario();
-            usuar. setId_usuario(Integer.parseInt(request.getParameter("cboUser")));
-            pres.setNombreUsuario(usuar);
-            docu = new documento();
-            docu. setIdDocumento(Integer.parseInt(request.getParameter("cboDocumento")));
-            pres.setTitulo(docu);
-            
-            
-           
-            daoPres = new  DAOPRESTAMO();
-            try {
-                daoPres.registrarPrestamos(pres);
-                response.sendRedirect("srvUsuario?accion=listarPrestamos");
-            } catch (Exception e) {
-                request.setAttribute("msje",
-                        "No se pudo registrar el prestamo" + e.getMessage());
-                request.setAttribute("prestamo", pres);
-                this.presentarFormulario(request, response);
+        pres = new prestamo();
+        pres.setFechaPrestamo(request.getParameter("txtPrestamo"));
+        pres.setFechaDevolucion(request.getParameter("txtDevolucion"));
+        usuar = new usuario();
+        usuar. setId_usuario(Integer.parseInt(request.getParameter("cboUser")));
+        pres.setNombreUsuario(usuar);
+        docu = new documento();
+        docu. setIdDocumento(Integer.parseInt(request.getParameter("cboDocumento")));
+        pres.setTitulo(docu); 
+         if (request.getParameter("chkEstado") != null) {
+                pres.setEstado(true);
+            } else {
+                pres.setEstado(false);
             }
-        }
-    }     
-
-   private void listarPrestamos(HttpServletRequest request, HttpServletResponse response) {
-        DAOPRESTAMO dao = new  DAOPRESTAMO();
-        List<prestamo> prestam = null;
+        daoPres = new  DAOPRESTAMO();
         try {
-            prestam = dao.listarPrestamos();
-            request.setAttribute("prestamos", prestam);
-
+            daoPres.registrarPrestamo(pres);
+            response.sendRedirect("srvPrestamo?accion=listarPrestamos");
         } catch (Exception e) {
-            request.setAttribute("msje", "No se pudo listar los prestamos" + e.getMessage());
-        } finally {
-            dao = null;
-        }
-        try {
-            this.getServletConfig().getServletContext().getRequestDispatcher("/vistas/listarPrestamos.jsp").forward(request, response);
-        } catch (Exception ex) {
-            request.setAttribute("msje", "No se puedo realizar la petición" + ex.getMessage());
+            request.setAttribute("msje",
+                    "No se pudo registrar el prestamo" + e.getMessage());
+            request.setAttribute("prestamos", pres);
+            this.presentarFormulario(request, response);
         }
     }
-    
+}
 
+
+   private void listarPrestamos(HttpServletRequest request, HttpServletResponse response) {
+    DAOPRESTAMO daoPrestamo = new DAOPRESTAMO();
+    List<prestamo> prestamos = null;
+    try {
+        prestamos = daoPrestamo.listarPrestamos();
+        request.setAttribute("prestamos", prestamos);
+    } catch (Exception e) {
+        request.setAttribute("msje", "No se pudo listar los préstamos" + e.getMessage());
+    } finally {
+        daoPrestamo = null;
+    }
+    try {
+        this.getServletConfig().getServletContext().getRequestDispatcher("/vistas/listarPrestamos.jsp").forward(request, response);
+    } catch (Exception ex) {
+        request.setAttribute("msje", "No se pudo realizar la petición" + ex.getMessage());
+    }
+}
+    
+  private void cambiarEstado(HttpServletRequest request, HttpServletResponse response) {
+           DAOPRESTAMO dao;
+        prestamo pres;
+        try {
+            dao = new DAOPRESTAMO();
+            pres = new prestamo();
+
+            if (request.getParameter("cambiar").equals("activar")) {
+                pres.setEstado(true);
+            } else {
+                pres.setEstado(false);
+            }
+
+            if (request.getParameter("cod") != null) {
+                pres.setIdPrestamo(Integer.parseInt(request.getParameter("cod")));
+                dao.cambiarVigencia(pres);
+            } else {
+                request.setAttribute("msje", "No se obtuvo el id del prestamo");
+            }
+
+        } catch (Exception e) {
+            request.setAttribute("msje", e.getMessage());
+        }
+        this.listarPrestamos(request, response);
+    }
+    
 }

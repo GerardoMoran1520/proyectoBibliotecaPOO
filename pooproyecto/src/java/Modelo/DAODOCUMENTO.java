@@ -48,17 +48,16 @@ public class DAODOCUMENTO extends Conexion {
         return documentos;
     }
       
-     public void registrarDocumento(documento doc) throws Exception {
+    public void registrarDocumento(documento doc) throws Exception {
     String sql;
-    sql = "INSERT INTO Documento (TIPODOCUMENTO, TITULO, AUTOR, UBICACIONFISICA, CANTIDADTOTAL, CANTIDADDISPONIBLE, ANIOPUBLICACION, ESTADO) "
+    sql = "INSERT INTO Documentos (TIPODOCUMENTO, TITULO, AUTOR, UBICACIONFISICA, CANTIDADTOTAL, CANTIDADDISPONIBLE, ANIOPUBLICACION) "
             + "VALUES ('" + doc.getTipoDocumento() + "', '"
             + doc.getTitulo() + "', '"
             + doc.getAutor() + "', '"
             + doc.getUbicacionFisica() + "', "
             + doc.getCantidadTotal() + ", "
             + doc.getCantidadDisponible() + ", "
-            + doc.getAnioPublicacion() + ", "
-            + (doc.isEstado() ? "1" : "0") + ")";
+            + doc.getAnioPublicacion() + ")";
     try {
         this.conectar(false);
         this.ejecutarOrden(sql);
@@ -68,6 +67,7 @@ public class DAODOCUMENTO extends Conexion {
         throw e;
     }
 }
+
         
   
 }

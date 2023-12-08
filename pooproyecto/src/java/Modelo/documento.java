@@ -30,6 +30,14 @@ public class documento {
         this.idDocumento = idDocumento;
     }
 
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -86,13 +94,7 @@ public class documento {
         this.estado = estado;
     }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
+    
 
   
    

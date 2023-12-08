@@ -157,19 +157,7 @@ public class DAOUSUARIO extends Conexion {
         }
     }
      
-      public void cambiarVigencia(usuario usus) throws Exception {
-        String sql = "UPDATE usuario SET estado = "
-                + (usus.isEstado() == true ? "1" : "0")
-                + " WHERE idusuario = " + usus.getId_usuario();
-        try {
-            this.conectar(false);
-            this.ejecutarOrden(sql);
-            this.cerrar(true);
-        } catch (Exception e) {
-            this.cerrar(false);
-            throw e;
-        }
-    }
+    
   
         
   

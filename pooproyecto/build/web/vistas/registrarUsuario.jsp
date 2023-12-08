@@ -94,31 +94,43 @@
 
             
 
-                    <!-- Sidebar Menu -->
+                  <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header "><center><b> INICIO</b></center></li>
                         <!-- Optionally, you can add icons to the links -->
                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Panel Administrador</span></a></li>
                         <li class="treeview">
-                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Usuarios</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                              <li class="active"><a href="srvUsuario?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                             
                              <li class="active"><a href="srvUsuario?accion=listarUsuarios"><i class="fa fa-address-card"></i>Usuarios</a></li>
 
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Prestamos</span>
+                            <a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>Registros Documentos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                               <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Listado</a></li>
+                              <li class="active"><a href="srvDocumento?accion=listarDocumentos"><i class="fa fa-archive"></i>Documentos</a></li>
+                           
+
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-cart-arrow-down"></i> <span> Registros Prestamos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                               <li class="active"><a href="srvPrestamo?accion=listarPrestamos"><i class="fa fa-cart-arrow-down"></i>Prestamos</a></li>
                               
                             </ul>
                         </li>
@@ -158,7 +170,7 @@
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                         <input id="nombre" type="text" class="form-control" placeholder="Ejem: Rafael" name="txtNombre" maxlength="10"
-                                               value="">
+                                               value="" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -166,7 +178,7 @@
                                     <div class="col-sm-4 input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                         <input id="nombre" type="password" class="form-control" placeholder="Ejem: $%Ale!**" name="txtClave" maxlength="10"
-                                               value="">
+                                               value="" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
