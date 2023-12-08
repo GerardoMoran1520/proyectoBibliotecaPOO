@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/pooproyecto">
+
+    <!-- Configuración del Pool de Conexiones -->
+    <!-- NOTA: EN CASO DE TENER MYSQL 8.0 se añade en driverclassname el driver para
+    poder conectarse con 8.0 ya que el actual es para (versión Connector/J 5.x y anteriores) -->
+    <!-- MYSQL PARA VERSIONES 8:  com.mysql.cj.jdbc.Driver -->
+    <Resource name="jdbc/PoolPooProyecto" auth="Container" type="javax.sql.DataSource"
+              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+              username="root" password="root" driverClassName="com.mysql.jdbc.Driver" 
+              
+             url="jdbc:mysql://localhost:3306/pooproyecto1"
+      />
+
+</Context>
+
