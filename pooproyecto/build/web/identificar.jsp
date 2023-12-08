@@ -62,7 +62,7 @@
     </div>
     <!-- /.social-auth-links -->
 
-    <a href="#">Reestablecer mi contraseña</a><br>
+    
    
 
   </div>
